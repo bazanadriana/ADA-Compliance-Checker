@@ -2,8 +2,6 @@
 
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
 
-**Repo:** https://github.com/bazanadriana/ADA-Compliance-Checker
-
 **Demo flow (how it works)**
 - Paste or upload HTML → click **Submit**
 - The app lists violations (ruleId, message, element, selector, codeSnippet)
@@ -100,23 +98,6 @@ Sample HTML (triggers multiple rules)
     <h1>Another Main Section</h1> <!-- HEADING_MULTIPLE_H1 -->
   </body>
 </html>
-
-   __
-```bash
-
-How highlighting works
-- Backend builds a stable CSS selector using nth-of-type.
-- Frontend renders the HTML into an iframe (srcdoc) and queries that selector to flash an outline on the target element.
-
-Innovative features
-- Click-to-highlight with stable nth-of-type selectors.
-- Compact code snippets per issue for context.
-- “Load Sample” button for instant demo.
-- Deterministic inline contrast math; focused, practical rule set.
-
-
-Author
-Adriana Bazan — GitHub: @bazanadriana
 
 ---
 
