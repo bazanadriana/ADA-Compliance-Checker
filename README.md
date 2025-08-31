@@ -31,8 +31,7 @@ README.md
 
 **Setup & run**
 
-_Backend (FastAPI)_
-```bash
+Backend (FastAPI)
 cd backend
 python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -65,7 +64,7 @@ Response
 }
 
 
-Implemented rules**
+Implemented rules
 DOC_LANG_MISSING — <html> must include a non-empty lang.
 DOC_TITLE_MISSING — <title> must exist and contain text.
 COLOR_CONTRAST — inline style only; ratios: ≥ 4.5:1 (normal), ≥ 3.0:1 (large ≥18px or ≥14px bold).
@@ -103,11 +102,11 @@ Sample HTML (triggers multiple rules)
 
    
 
-How highlighting works**
+How highlighting works
 - Backend builds a stable CSS selector using nth-of-type.
 - Frontend renders the HTML into an iframe (srcdoc) and queries that selector to flash an outline on the target element.
 
-Innovative features**
+Innovative features
 - Click-to-highlight with stable nth-of-type selectors.
 - Compact code snippets per issue for context.
 - “Load Sample” button for instant demo.
