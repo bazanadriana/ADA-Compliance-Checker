@@ -1,20 +1,21 @@
-**ADA-Compliance-Checker**
+# ADA-Compliance-Checker
 
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
 
-🚀 Demo flow (how it works)
-1. Paste or upload HTML → click Submit
-2. The app shows a list of violations (rule, message, element, selector, code snippet)
-3. Click any violation → the element flashes inside the preview (via CSS selector)
+**Repo:** https://github.com/bazanadriana/ADA-Compliance-Checker
 
-🧰 Stack
-- **Frontend:** JavaScript (**TypeScript**) — React (Vite). Built with Vite; the TypeScript is compiled to plain JavaScript for the browser.
-- **Backend:** Python, FastAPI, BeautifulSoup (`lxml`)
+**Demo flow (how it works)**
+- Paste or upload HTML → click **Submit**
+- The app lists violations (ruleId, message, element, selector, codeSnippet)
+- Click any violation → the element flashes inside the preview (CSS selector)
+
+**Stack**
+- **Frontend:** JavaScript (**TypeScript**) – React (Vite + Tailwind). TypeScript is compiled to plain JS for the browser.
+- **Backend:** Python (FastAPI), BeautifulSoup (**lxml**)
 - **API:** `POST /api/check` → returns `issues[]`
-> Note: The UI code is written in TypeScript but compiled to JavaScript during build (`npm run build`).
 
+**Project structure**
 
-🏗️ Project Structure
 frontend/
   src/
     components/HtmlInput.tsx  components/HtmlPreview.tsx  components/ResultsList.tsx
@@ -27,25 +28,23 @@ backend/
   requirements.txt
 README.md
 
-⚙️ Setup & Run
-1) Backend (FastAPI)
-**from repo root**
+
+**Setup & run**
+
+_Backend (FastAPI)_
+```bash
 cd backend
-python3 -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
+python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-
-**start from the repo root so package imports resolve**
-
 cd ..
 uvicorn backend.app:app --reload --port 8000
 
-2) Frontend (Vite + React + Tailwind)
+Frontend (Vite + React + Tailwind)
 cd frontend
 npm install
-**Tailwind v3 setup (recommended for this project)**
 npm i -D tailwindcss@3.4.10 postcss@8 autoprefixer@10
 npm run dev
+
 
 🔌 API Contract
 Request
@@ -66,51 +65,72 @@ Response
 }
 
 🔌 API Contract
-1) General Document
+POST /api/check
+Content-Type: application/json
+
+{ "html": "<!doctype html><html>...</html>" }
+
+API response example
+{
+  "issues": [
+    {
+      "ruleId": "COLOR_CONTRAST",
+      "message": "Low contrast ratio: 1.98. Minimum expected is 3.0.",
+      "element": "h1",
+      "selector": "html > body > h1:nth-of-type(1)",
+      "codeSnippet": "<h1 style=\\\"...\\\">Welcome</h1>"
+    }
+  ]
+}
+
+Implemented rules
 DOC_LANG_MISSING — <html> must include a non-empty lang.
- <title></title> <!-- DOC_TITLE_MISSING -->
+DOC_TITLE_MISSING — <title> must exist and contain text.
+COLOR_CONTRAST — inline style only; ratios: ≥ 4.5:1 (normal), ≥ 3.0:1 (large ≥18px or ≥14px bold).
+IMG_ALT_MISSING — alt required and not empty.
+IMG_ALT_LENGTH — alt ≤ 120 characters.
+LINK_GENERIC_TEXT — flags “click here”, “read more”, “here”, “more”, “learn more”, etc.
+HEADING_ORDER — no skipping levels (e.g., h1 → h3).
+HEADING_MULTIPLE_H1 — only one <h1> per page.
+Notes/limits
+Contrast is computed from inline styles with a simple ancestor background fallback.
+External CSS, images/gradients, and computed styles are out of scope by design.
+Large text detection uses inline font-size / font-weight.
+
+Sample HTML (triggers multiple rules)
+<!doctype html>
+<html>
+  <head>
+    <title></title> <!-- DOC_TITLE_MISSING -->
   </head>
   <!-- DOC_LANG_MISSING: no lang on <html> -->
   <body>
     <h1 style="color: lightgreen; background: green; font-size:22px;">
       Welcome to Our Site
     </h1> <!-- COLOR_CONTRAST (large text) -->
-
     <h3>Our Services</h3> <!-- HEADING_ORDER (skips h2) -->
 
-    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING (empty alt) -->
+    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING -->
     <img src="/images/chart.png" alt="Quarterly earnings chart for our organization with multiple series across twelve months showing comparative performance between regions; decorative elements include subtle gradients and annotations that are not essential for understanding."> <!-- IMG_ALT_LENGTH -->
 
     <p>To learn more, <a href="/more">click here</a>.</p> <!-- LINK_GENERIC_TEXT -->
 
     <h1>Another Main Section</h1> <!-- HEADING_MULTIPLE_H1 -->
   </body>
-</html>DOC_TITLE_MISSING — <title> must exist and contain text.
-COLOR_CONTRAST — inline-style only; required ratios: ≥4.5:1 normal, ≥3.0:1 large (≥18px, or ≥14px bold).
-2) Images
-IMG_ALT_MISSING — flags when alt is missing or empty (alt="").
-IMG_ALT_LENGTH — flags when alt length > 120 characters.
-3) Links
-LINK_GENERIC_TEXT — flags “click here”, “read more”, “here”, “more”, “learn more”, etc.
-4) Headings
-HEADING_ORDER — no skipping levels (e.g., h1 → h3).
-HEADING_MULTIPLE_H1 — only one h1 per page.
-Notes/limits: Contrast is computed from inline style only (with simple ancestor background fallback). External CSS, images, gradients, and computed styles are out of scope by design for this assignment. Large text detection uses inline font-size and font-weight.
+</html>
+
    
 
+**How highlighting works**
+- Backend builds a stable CSS selector using nth-of-type.
+- Frontend renders the HTML into an iframe (srcdoc) and queries that selector to flash an outline on the target element.
 
-🔍 How highlighting works
+**Innovative features**
+- Click-to-highlight with stable nth-of-type selectors.
+- Compact code snippets per issue for context.
+- “Load Sample” button for instant demo.
+- Deterministic inline contrast math; focused, practical rule set.
 
-The backend builds a stable CSS selector using nth-of-type.
-The frontend renders HTML into an iframe (srcdoc) and queries that selector to flash an outline on the target element.
 
-✨ Innovative Features
-
-Click-to-highlight with stable nth-of-type selectors.
-Compact code snippets in each issue for context.
-“Load Sample” button for instant demo.
-Strict but focused rule set; inline contrast math for deterministic results.
-
-👤 Author
-
+Author
 Adriana Bazan — GitHub: @bazanadriana
