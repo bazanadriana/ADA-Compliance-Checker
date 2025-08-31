@@ -98,6 +98,7 @@ HEADING_MULTIPLE_H1 — only one h1 per page.
 Notes/limits: Contrast is computed from inline style only (with simple ancestor background fallback). External CSS, images, gradients, and computed styles are out of scope by design for this assignment. Large text detection uses inline font-size and font-weight.
    
 
+
 🔍 How highlighting works
 
 The backend builds a stable CSS selector using nth-of-type.
