@@ -117,3 +117,18 @@ Innovative features
 
 Author
 Adriana Bazan — GitHub: @bazanadriana
+
+---
+
+## How highlighting works
+- Backend builds a stable CSS selector using `nth-of-type`.
+- Frontend renders the HTML into an iframe (`srcdoc`) and queries that selector to flash an outline on the target element.
+
+## Innovative features
+- Click-to-highlight with stable `nth-of-type` selectors.
+- Compact code snippets per issue for context.
+- “Load Sample” button for instant demo.
+- Deterministic inline contrast math; focused, practical rule set.
+
+## Author
+Adriana Bazan — GitHub: @bazanadriana
