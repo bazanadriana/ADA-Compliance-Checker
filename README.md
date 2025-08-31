@@ -96,31 +96,7 @@ LINK_GENERIC_TEXT — flags “click here”, “read more”, “here”, “mo
 HEADING_ORDER — no skipping levels (e.g., h1 → h3).
 HEADING_MULTIPLE_H1 — only one h1 per page.
 Notes/limits: Contrast is computed from inline style only (with simple ancestor background fallback). External CSS, images, gradients, and computed styles are out of scope by design for this assignment. Large text detection uses inline font-size and font-weight.
-
-🧪 Sample HTML (triggers all rules)
-<!doctype html>
-<html>
-  <head>
-    <title></title> <!-- DOC_TITLE_MISSING -->
-  </head>
-  <!-- DOC_LANG_MISSING: no lang on <html> -->
-  <body>
-    <h1 style="color: lightgreen; background: green; font-size:22px;">
-      Welcome to Our Site
-    </h1> <!-- COLOR_CONTRAST (large text) -->
-    <h3>Our Services</h3> <!-- HEADING_ORDER (skips h2) -->
-
-    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING -->
-    <img src="/images/chart.png" alt="Quarterly earnings chart for our organization with multiple series across twelve months showing comparative performance between regions; decorative elements include subtle gradients and annotations that are not essential for understanding."> <!-- IMG_ALT_LENGTH -->
-
-    <p>To learn more, <a href="/more">click here</a>.</p> <!-- LINK_GENERIC_TEXT -->
-
-    <h1>Another Main Section</h1> <!-- HEADING_MULTIPLE_H1 -->
-  </body>
-</html>
-
    
-
 
 🔍 How highlighting works
 
