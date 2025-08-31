@@ -36,6 +36,7 @@ source .venv/bin/activate         # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
 **start from the repo root so package imports resolve**
+
 cd ..
 uvicorn backend.app:app --reload --port 8000
 
