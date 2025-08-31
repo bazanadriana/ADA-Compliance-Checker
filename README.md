@@ -100,7 +100,7 @@ Sample HTML (triggers multiple rules)
     <h1>Another Main Section</h1> <!-- HEADING_MULTIPLE_H1 -->
   </body>
 </html>
-
+-
    
 
 How highlighting works
