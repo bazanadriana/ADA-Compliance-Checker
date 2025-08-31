@@ -1,4 +1,4 @@
-ADA Compliance Checker
+**ADA-Compliance-Checker**
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
 
 🚀 Demo flow (how it works)
@@ -75,7 +75,7 @@ IMG_ALT_LENGTH — flags when alt length > 120 characters.
 LINK_GENERIC_TEXT — flags “click here”, “read more”, “here”, “more”, “learn more”, etc.
 4) Headings
 HEADING_ORDER — no skipping levels (e.g., h1 → h3).
-HEADING_MULTIPLE_H1 — only one <h1> per page.
+HEADING_MULTIPLE_H1 — only one h1 per page.
 Notes/limits: Contrast is computed from inline style only (with simple ancestor background fallback). External CSS, images, gradients, and computed styles are out of scope by design for this assignment. Large text detection uses inline font-size and font-weight.
 
 🧪 Sample HTML (triggers all rules)
