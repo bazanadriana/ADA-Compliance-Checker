@@ -1,7 +1,3 @@
-**ADA-Compliance-Checker**
-<<<<<<< HEAD
-**ADA-Compliance-Checker**
-=======
 ADA Compliance Checker
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
 
@@ -118,4 +114,3 @@ Strict but focused rule set; inline contrast math for deterministic results.
 
 👤 Author
 Adriana Bazan — GitHub: @bazanadriana
->>>>>>> ddc6951 (feat: initial import)
