@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-### ADA-Compliance-Checker
+**ADA-Compliance-Checker**
 =======
 ADA Compliance Checker
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
@@ -31,20 +31,20 @@ README.md
 
 ⚙️ Setup & Run
 1) Backend (FastAPI)
-### from repo root
+**from repo root**
 cd backend
 python3 -m venv .venv
 source .venv/bin/activate         # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-### start from the repo root so package imports resolve
+**start from the repo root so package imports resolve**
 cd ..
 uvicorn backend.app:app --reload --port 8000
 
 2) Frontend (Vite + React + Tailwind)
 cd frontend
 npm install
-### Tailwind v3 setup (recommended for this project)
+**Tailwind v3 setup (recommended for this project)**
 npm i -D tailwindcss@3.4.10 postcss@8 autoprefixer@10
 npm run dev
 
