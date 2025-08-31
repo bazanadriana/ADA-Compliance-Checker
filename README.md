@@ -1,4 +1,5 @@
 **ADA-Compliance-Checker**
+
 A lightweight full-stack app that checks pasted or uploaded HTML for common accessibility issues and highlights the exact offending elements in a live preview.
 
 🚀 Demo flow (how it works)
@@ -66,7 +67,24 @@ Response
 🔌 API Contract
 1) General Document
 DOC_LANG_MISSING — <html> must include a non-empty lang.
-DOC_TITLE_MISSING — <title> must exist and contain text.
+ <title></title> <!-- DOC_TITLE_MISSING -->
+  </head>
+  <!-- DOC_LANG_MISSING: no lang on <html> -->
+  <body>
+    <h1 style="color: lightgreen; background: green; font-size:22px;">
+      Welcome to Our Site
+    </h1> <!-- COLOR_CONTRAST (large text) -->
+
+    <h3>Our Services</h3> <!-- HEADING_ORDER (skips h2) -->
+
+    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING (empty alt) -->
+    <img src="/images/chart.png" alt="Quarterly earnings chart for our organization with multiple series across twelve months showing comparative performance between regions; decorative elements include subtle gradients and annotations that are not essential for understanding."> <!-- IMG_ALT_LENGTH -->
+
+    <p>To learn more, <a href="/more">click here</a>.</p> <!-- LINK_GENERIC_TEXT -->
+
+    <h1>Another Main Section</h1> <!-- HEADING_MULTIPLE_H1 -->
+  </body>
+</html>DOC_TITLE_MISSING — <title> must exist and contain text.
 COLOR_CONTRAST — inline-style only; required ratios: ≥4.5:1 normal, ≥3.0:1 large (≥18px, or ≥14px bold).
 2) Images
 IMG_ALT_MISSING — flags when alt is missing or empty (alt="").
@@ -89,10 +107,9 @@ Notes/limits: Contrast is computed from inline style only (with simple ancestor 
     <h1 style="color: lightgreen; background: green; font-size:22px;">
       Welcome to Our Site
     </h1> <!-- COLOR_CONTRAST (large text) -->
-
     <h3>Our Services</h3> <!-- HEADING_ORDER (skips h2) -->
 
-    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING (empty alt) -->
+    <img src="/images/hero.jpg" alt=""> <!-- IMG_ALT_MISSING -->
     <img src="/images/chart.png" alt="Quarterly earnings chart for our organization with multiple series across twelve months showing comparative performance between regions; decorative elements include subtle gradients and annotations that are not essential for understanding."> <!-- IMG_ALT_LENGTH -->
 
     <p>To learn more, <a href="/more">click here</a>.</p> <!-- LINK_GENERIC_TEXT -->
@@ -101,16 +118,21 @@ Notes/limits: Contrast is computed from inline style only (with simple ancestor 
   </body>
 </html>
 
+   
+
 
 🔍 How highlighting works
+
 The backend builds a stable CSS selector using nth-of-type.
 The frontend renders HTML into an iframe (srcdoc) and queries that selector to flash an outline on the target element.
 
 ✨ Innovative Features
+
 Click-to-highlight with stable nth-of-type selectors.
 Compact code snippets in each issue for context.
 “Load Sample” button for instant demo.
 Strict but focused rule set; inline contrast math for deterministic results.
 
 👤 Author
+
 Adriana Bazan — GitHub: @bazanadriana
